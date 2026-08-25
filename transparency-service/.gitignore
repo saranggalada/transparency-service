@@ -1,0 +1,10 @@
+# Generated trust anchors, signing keys and service trust store (contain secrets).
+identities/
+__pycache__/
+*.pyc
+# Generated demo artefacts, signed statements, receipts and the built verifier.
+examples/*.cose
+examples/*.txt
+examples/*.safetensors
+examples/*.yaml
+examples/ts-verify

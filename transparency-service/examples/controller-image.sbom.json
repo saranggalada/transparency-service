@@ -1,0 +1,1 @@
+{"bomFormat":"CycloneDX","specVersion":"1.5","components":[{"type":"container","name":"kserve-controller","version":"1.4.0"}]}

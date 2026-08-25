@@ -1,0 +1,25 @@
+#!/bin/bash
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+#
+# `ts` -- Transparency Service CLI launcher.
+# Ensures the repo's venv exists with pyscitt installed, then runs the CLI.
+
+set -euo pipefail
+
+TS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$TS_DIR/.." && pwd)"
+cd "$REPO_ROOT"
+
+if [ ! -f "venv/bin/activate" ]; then
+    python3.12 -m venv venv
+    # shellcheck disable=SC1091
+    source venv/bin/activate
+    pip install --disable-pip-version-check --quiet --editable ./pyscitt
+else
+    # shellcheck disable=SC1091
+    source venv/bin/activate
+fi
+
+export PYTHONPATH="$TS_DIR:${PYTHONPATH:-}"
+exec python3.12 -m tscli.main "$@"
